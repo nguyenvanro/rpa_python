@@ -1,64 +1,70 @@
 import pandas as pd
 
 data_dict = {
-    "Ten": ["Anh", "Bình", "Minh", "Tuấn"],
-    "Lop": ["23CT1", "23CT1", "23CT1", "23CT2"],
-    "DiemTB": [8.0, 7.9, None, 9.0],
-    "Tuoi": [20, 20, 21, 23],
+    # key: value
+    # cột: giá trị trong cột
+    "Ten": ["An", "Bình", "Minh", "Tuấn"],
+    "Tuoi": [22, 23, 22, 24],
+    "DiemTB": [8.9, 8.0, 8.5, None],
+    "Lop": ["23CT1", "23CT4", "23CT4","23CT1"],
 }
 
 df_input = pd.DataFrame(data=data_dict)
 print(df_input)
-# Thêm cột địa chỉ(DiaChi)
-print("________________________________________________")
+print("______________________________________________________")
+# Thêm cột DiaChi, DiemPython
 
-# truy xuất cột: Ten
-print(df_input["Ten"])
-print("________________________________________________")
-
-# Truy xuất cột: DiemTB
-print(df_input["DiemTB"])
-print("________________________________________________")
-
-# truy xuất dòng: row
-print(df_input.loc[0])
-print("________________________________________________")
-
-# lấy ra giá trị trong ô =index, tên cột
-print(df_input.loc[1, "Ten"])
-print("________________________________________________")
-
-# Lấy ra giá trị tại cột DiemTB dòng cuối cùng
 
 # Lọc dữ liệu
-# Lọc ra những học sinh có DiemTB >= 8.0
-df_filter_point = df_input[df_input["DiemTB"] >= 8.0]
-print(df_filter_point)
-print("________________________________________________")
+# Truy xuất dòng theo vị trí index
+print(df_input.loc[0])
+print(df_input.loc[1])
+print(df_input.loc[2])
+print("______________________________________________________")
 
-# Lọc ra những học sinh có DiemTB >= 8.0 và Lớp 23CT1
-df_filter_2 = df_input[(df_input["DiemTB"] >= 8.0) & (df_input["Lop"] == "23CT1")]
-print(df_filter_2)
-print("________________________________________________")
+# Truy xuất theo tên cột
+print(df_input["Ten"])
+print("______________________________________________________")
 
-# So sánh None(NULL) với ""
+print(df_input["DiemTB"])
+print("______________________________________________________")
+
+# truy xuất một ô bất kì: index, tên cột
+name = df_input.loc[1, "Ten"]
+print(name)
+print("______________________________________________________")
+
+# Lọc ra dữ liệu có DiemTB >= 8.0
+df_filter = df_input[df_input["DiemTB"] >= 8.0]
+print(df_filter)
+print("______________________________________________________")
+
+# Lọc ra dữ liệu có DiemTB >= 8.0 và Lớp 23CT4
+df_filter_class = df_input[(df_input["DiemTB"] >= 8.0) & (df_input["Lop"] == "23CT4")]
+print(df_filter_class)
+
+# Lọc ra dữ liệu học sinh yếu
+
+# Lọc ra dữ liệu học sinh trung bình
+
+# phân biệt None(NULL) với ''
 my_var = None
-my_str = " "
-my_name = "An"
-print("________________________________________________")
+my_str = ''
+my_name = 'An'
+print("______________________________________________________")
 
-# Xóa dữ liệu dòng trống: NaN
+# Xóa dữ liệu trống
 print(df_input.dropna())
-print("________________________________________________")
+print("______________________________________________________")
 
-# Điền dữ liệu vào dòng trống: NaN
+# Điềm số 0 vào ô trống
 print(df_input.fillna(0))
-print("________________________________________________")
+print("______________________________________________________")
 
-# groupby: cột Lớp - lấy ra bảng điểm theo lớp
-df_group_by = df_input.groupby("Lop")
-print(df_group_by)
-for i_group in df_group_by:
+# Nhóm theo Lop
+df_group = df_input.groupby("Lop")
+print(df_group)
+for i_group in df_group:
     print(i_group)
-    print("_____________________________")
+    print("---------------------------------------")
 print()

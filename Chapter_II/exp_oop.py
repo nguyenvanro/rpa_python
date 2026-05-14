@@ -37,7 +37,8 @@ print(obj_kia.change_color("Yellow"))
 # Thêm thuộc tính màu và phương thức(hành động) thay đổi màu
 
 # Kế thừa, đóng gói
-class Person:
+from abc import ABC, abstractmethod
+class Person(ABC):
     def __init__(self, name, salary):
         self.name = name
         # private
@@ -49,6 +50,14 @@ class Person:
     def get_salary(self):
         return self.__salary
     
+    # định nghĩa hành vi tính lương
+    @abstractmethod
+    def caculate_salary(self):
+        pass
+# Emoployee: lương cơ bản
+# Developer: lương cơ bản + thưởng kĩ thuật 20%
+# Manager: lương cơ bản + thưởng quản lý 30%
+
 class Employee(Person):
     def __init__(self, name, address, salary):
         # Kế thừa thuộc tính name từ lớp Cha(Person)
@@ -68,6 +77,34 @@ class Employee(Person):
         self.__salary = salary
         return self.__salary
     
+    def caculate_salary(self):
+        self.__salary = 5000000
+        return self.__salary
+
+class Developer(Person):
+    def __init__(self, name, salary, salary_per_dev):
+        super().__init__(name, salary)
+        self.__salary = salary
+        self.__salary_per_dev = salary_per_dev
+
+    def caculate_salary(self):
+        print("lương + thưởng kĩ thuật 20%")
+        self.__salary = self.__salary + self.__salary_per_dev
+        return self.__salary
+
+
+class Manager(Person):
+    def __init__(self, name, salary, salary_manage):
+        super().__init__(name, salary)
+        self.__salary = salary
+        self.__salary_manage = salary_manage
+
+    # triển khai hàm tính lương cho Manager: lương cơ bản + thưởng quản lý 30%
+    def caculate_salary(self):
+        print("lương cơ bản + thưởng quản lý 30%")
+        self.__salary =  self.__salary + self.__salary_manage
+        return self.__salary
+        
 obj_person = Person(name="", salary=0)
 print(obj_person)
 print(obj_person.get_name())
@@ -81,5 +118,35 @@ print(obj_employee.get_name())
 print(obj_employee.get_salary())
 print(obj_employee.set_salary(2000000))
 
-# Thay đổi lương cho nhân viên
-print()
+obj_employee.caculate_salary()
+
+obj_dev = Developer(name="Dev An", salary=5000000, salary_per_dev=1000000)
+obj_dev.caculate_salary()
+
+obj_manage = Manager(name="Manage Bình", salary=5000000, salary_per_dev=3000000)
+obj_manage.caculate_salary()
+
+# triển khai tính đa hình về tính diện tích, chu vi 
+# của Hình tròn, Hình vuông
+
+class Hinh(ABC):
+    def __init__(self, chieu_dai, chieu_rong):
+        self.chieu_dai = chieu_dai
+        self.chieu_rong = chieu_rong
+
+    @abstractmethod
+    def tinh_dien_tich(self):
+        pass
+
+    @abstractmethod
+    def tinh_chu_vi(self):
+        pass
+
+class HinhTron(Hinh):
+    def __init__(self, chieu_dai, chieu_rong):
+        super().__init__(chieu_dai, chieu_rong)
+    
+
+class HinhVuong(Hinh):
+    def __init__(self, chieu_dai, chieu_rong):
+        super().__init__(chieu_dai, chieu_rong)

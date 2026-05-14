@@ -1,52 +1,51 @@
-# Hàm
-1 + 2
-2 + 3
-4 + 10
+a = 1 + 2
+c = 2 + 4
+d = 5 + 7
+e = 10 + 7
 
 def tinh_tong(a, b):
     tong = a + b
-    # return tong, "abc", True
+    return tong, "abc", True
 
-result = tinh_tong(a=1, b=2)
-print("tong 1: ", result)
-print("type tong: ", type(result))
+tong = tinh_tong(a=1, b=2)
+print("tong = ", tong)
+print("tong type", type(tong))
 
-tong, my_str, my_boolean = tinh_tong(a=4, b=10)
-print("tong 2: ", tong)
-print("type tong: ", type(tong))
-print("type my_str: ", type(my_str))
+tong_2, my_str, my_boolean = tinh_tong(a=2, b=4)
+print("tong_2 = ", tong_2)
+print("tong_2 type", type(tong_2))
+print("my_str type", type(my_str))
 
-# print()
-
-# # viết hàm trả về danh sách số chẵn từ 1 -> 10
-def danh_sach_so_chan():
+# Viết hàm trả về danh sách số chẵn từ 1 -> 10
+def so_chan():
     numbers = [1,2,3,4,5,6,7,8,9,10]
-    so_chan = []
+    danh_sach_so_chan = []
     tong = 0
-    for i in numbers:
-        if i % 2 == 0:
-            so_chan.append(i)
-            tong += i
-    return so_chan, tong
+    for element in numbers:
+        if element % 2 == 0:
+            danh_sach_so_chan.append(element)
+            tong += element
+    return danh_sach_so_chan, tong
 
-so_chan, tong = danh_sach_so_chan()
- 
-def say_welcom(name="You"):
-    print("hello ", name)
+danh_sach_so_chan, tong = so_chan()
+print(danh_sach_so_chan)
+print(tong)
 
-say_welcom()
-say_welcom(name="An")
+def say_welcome(name="You"):
+    print("Hello, ", name)
+
+say_welcome()
+say_welcome('Anh')
+
+
+var_global = 10
+def func():
+    var_local = 20
+    print("var_local", var_local)
+    print("var_global", var_global)
+
+func()
+print("var_local", var_local)
+print("var_global", var_global)
 
 # Viết hàm trả về tổng số chẵn từ 1 -> 10
-
-
-# local vs global
-var_global = 12
-def func_test():
-    var_local = 10
-    print("local: ", var_local)
-    print("global: ", var_global)
-
-func_test()
-print("local: ", var_local)
-print("global: ", var_global)
